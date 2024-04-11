@@ -2,14 +2,14 @@
 /* jshint boss: true */
 /* jshint loopfunc: true */
 
-import * as holiday_definitions from './holidays/index';
+import * as default_holiday_definitions from './holidays/index';
 import word_error_correction from './locales/word_error_correction.yaml';
 import lang from './locales/lang.yaml';
 
 import SunCalc from 'suncalc';
 import i18next from './locales/core';
 
-export default function(value, nominatim_object, optional_conf_parm) {
+export default function(value, nominatim_object, optional_conf_parm, custom_holiday_definitions) {
     // Short constants {{{
     var word_value_replacement = { // If the correct values can not be calculated.
         dawn    : 60 * 5 + 30,
@@ -251,6 +251,16 @@ export default function(value, nominatim_object, optional_conf_parm) {
     }
 
     /* }}} */
+
+
+    /* custom_holiday_definitions {{{
+     *
+     * Can be used to override the built-in holiday definitions.
+     */
+
+    var holiday_definitions = custom_holiday_definitions || default_holiday_definitions;
+    /* }}} */
+
     /* }}} */
 
     // Tokenize value and generate selector functions. {{{
